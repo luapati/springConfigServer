@@ -9,8 +9,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
-@RefreshScope
 @SpringBootApplication
+@RefreshScope
 public class UserInputCrudApplication {
 
 	public static void main(String[] args) throws RestClientException, IOException {

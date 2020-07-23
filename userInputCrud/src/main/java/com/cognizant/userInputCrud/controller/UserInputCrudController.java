@@ -5,6 +5,8 @@ import java.util.NoSuchElementException;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,53 +26,15 @@ public class UserInputCrudController {
 	
 	@Autowired
 	UserInputCrudService userInputCrudService;
-
-//	@PostMapping("/user")
-//	public String addUser() throws RestClientException, IOException {
-//
-//		String baseUrl = "http://localhost:8080/userDetails";
-//
-//		RestTemplate restTemplate = new RestTemplate();
-//		ResponseEntity<String> response = null;
-//		try {
-//			response = restTemplate.exchange(baseUrl, HttpMethod.POST, getHeaders(), String.class);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		System.out.println(response.getBody().toString());
-//		HttpStatus status = response.getStatusCode();
-//		System.out.println(status);
-//		return response.getBody().toString();
-//
-//	}
-//
-//	@GetMapping(value="/showsAll")
-//	public String showsAll() throws RestClientException, IOException {
-//		
-//		String baseUrl = "http://localhost:8080/showall";
-//
-//		RestTemplate restTemplate = new RestTemplate();
-//		ResponseEntity<String> response = null;
-//		try {
-//			response = restTemplate.exchange(baseUrl, HttpMethod.GET, getHeaders(), String.class);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		System.out.println(response.getBody());
-//		HttpStatus status = response.getStatusCode();
-//		System.out.println(status);
-//		return response.getBody().toString();
-//	}
-//
-//	public static HttpEntity<?> getHeaders() throws IOException {
-//		HttpHeaders httpHeaders = new HttpHeaders();
-//		httpHeaders.set("Accept", MediaType.APPLICATION_JSON_VALUE);
-//		return new HttpEntity<>(httpHeaders);
-//	}
+	
+	@Value("${user}")
+	private String user;
+	@Value("${pwd}")
+	private String password;
 	
 	@GetMapping("/")
 	public String getAll() {
-		return "Reading all Data\n" + userInputCrudService.getAll().toString();
+		return "Reading all Data\n" + userInputCrudService.getAll().toString() + "\n"+ user+ "\n"+ password;
 	}
 	
 	@GetMapping("/addUser/{name}")
